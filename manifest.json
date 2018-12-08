@@ -1,0 +1,30 @@
+{
+  "name": "Spigot Update Templates",
+  "version": "1.0.0",
+  "description": "Save various templates to make updates look better and less tedious to setup!",
+  "permissions": [
+    "https://www.spigotmc.org/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.spigotmc.org/resources/*/add-version"
+      ],
+      "js": [
+        "templateStorage.js",
+        "templateHTML.js",
+        "visual.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon16.png"
+  },
+  "manifest_version": 2
+}
