@@ -3,6 +3,7 @@ const templateStorage = {
     variables: {
         resourceId: window.location.href.substring(window.location.href.lastIndexOf(".")).replace(".", "").split("/")[0],
         templateContent: document.querySelector(".redactor_").contentDocument,
+        bbCodeEditorButton: document.querySelector(".redactor_btn_group.redactor_btn_right"),
         responseBox: null,
         editTemplatesList: null,
         resourceTemplatesList: null,
@@ -14,13 +15,16 @@ const templateStorage = {
         selectButton: null
     },
 
-    preInit: function () {
+    pageOpenInit: function () {
+        this.variables.bbCodeEditorButton.onclick = function () {
+            templateWidget.setMenu(false);
+        };
         let templateName = localStorage.getItem(selectedTemplateKeyPrefix + this.variables.resourceId);
         if (templateName === null) return;
         this.loadTemplate(localStorage.getItem(templateKeyPrefix + templateName));
     },
 
-    init: function () {
+    templateMenuInit: function () {
         this.variables.responseBox = document.querySelector("#templateActionResponse");
         this.variables.saveButton = document.querySelector("#templateSaveButton");
         this.variables.loadButton = document.querySelector("#templateLoadButton");

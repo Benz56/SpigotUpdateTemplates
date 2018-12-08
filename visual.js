@@ -15,17 +15,22 @@ const templateWidget = {
         this.variables.img_li.appendChild(this.variables.img);
         this.variables.saveInput.innerHTML = templateHTML;
         this.bindToggleMenuAction();
-        templateStorage.preInit();
+        templateStorage.pageOpenInit();
     },
 
     bindToggleMenuAction: function () {
         this.variables.img_li.onclick = function () {
-            if (!templateWidget.variables.menuOpen) {
-                templateWidget.variables.redactorBoxParent.prepend(templateWidget.variables.saveInput);
-                templateStorage.init();
-            } else templateWidget.variables.redactorBoxParent.removeChild(templateWidget.variables.saveInput);
-            templateWidget.variables.menuOpen = !templateWidget.variables.menuOpen;
+            templateWidget.setMenu(!templateWidget.variables.menuOpen);
         }
+    },
+
+    setMenu(bool = true) {
+        if (bool === this.variables.menuOpen) return;
+        if (bool) {
+            this.variables.redactorBoxParent.prepend(this.variables.saveInput);
+            templateStorage.templateMenuInit();
+        } else this.variables.redactorBoxParent.removeChild(this.variables.saveInput);
+        this.variables.menuOpen = bool;
     }
 };
 templateWidget.init();
