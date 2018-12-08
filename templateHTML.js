@@ -11,8 +11,8 @@ const templateHTML =
     
                 .updateTemplateTable th {
                     background-image: linear-gradient(#f4a03c, #f38918);
-                    text-shadow: 2px 2px #bfbfbf;
                     color: #FFFFFF;
+                    font-weight: bold;
                     font-size: 16px;
                     border: 1px solid #dddddd;
                     text-align: center;
@@ -54,7 +54,7 @@ const templateHTML =
                     <p>Save a new template. The content is the currently written update message.</p><br>
                     <form>
                         <input id="templateNameInput" type="text" name="templateName" placeholder="Template name"><br><br>
-                        <input id="templateSaveButton" type="button" value="Save">
+                        <input id="templateSaveButton" type="button" value="Save" title="Save the content below as a new template">
                     </form>
                 </td>
                 <td>
@@ -64,20 +64,20 @@ const templateHTML =
                         <select id="editTemplatesList" name="Templates">
                         </select>
                         <br><br>
-                        <input id="templateLoadButton" type="button" value="Load">
-                        <input id="templateUpdateButton" type="button" value="Update">
-                        <input id="templateDeleteButton" type="button" value="Delete">
+                        <input id="templateLoadButton" type="button" value="Load" title="Load the selected template">
+                        <input id="templateUpdateButton" type="button" value="Update" title="Update the selected template to the content below">
+                        <input id="templateDeleteButton" type="button" value="Delete" title="Delete the template and all selection defaults of it">
                     </form>
                 </td>
                 <td>
                     <p>Select a template as the project/resource default.</p><br>
                     <form>
-                        Templates:<br>
+                        Selected:<br>
                         <select id="resourceTemplatesList" name="Templates">
                             <option value="None">None</option>
                         </select>
                         <br><br>
-                        <input id="templateSelectButton" type="button" value="Select">
+                        <input id="templateSelectButton" type="button" value="Select" title="Select the template to be loaded automatically on page load">
                     </form>
                 </td>
             </tr>
