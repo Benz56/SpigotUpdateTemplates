@@ -81,4 +81,9 @@ const templateHTML =
                     </form>
                 </td>
             </tr>
+            <tr>
+                <td colspan="3">
+                    <p id="templateActionResponse"></p>
+                </td>
+            </tr>
         </table>`;
