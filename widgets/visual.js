@@ -16,6 +16,9 @@ const templateWidget = {
         this.variables.saveInput.innerHTML = templateHTML;
         this.bindToggleMenuAction();
         templateStorage.pageOpenInit();
+        chrome.storage.sync.get(["SUT_AutoOpen"], function (result) {
+            templateWidget.setMenu(result.SUT_AutoOpen);
+        });
     },
 
     bindToggleMenuAction: function () {

@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Save various templates to make updates look better and less tedious to setup!",
   "permissions": [
-    "https://www.spigotmc.org/*"
+    "https://www.spigotmc.org/*",
+    "storage"
   ],
   "content_scripts": [
     {
@@ -11,9 +12,9 @@
         "https://www.spigotmc.org/resources/*/add-version"
       ],
       "js": [
-        "templateStorage.js",
+        "widgets/templateStorage.js",
         "templateHTML.js",
-        "visual.js"
+        "widgets/visual.js"
       ],
       "run_at": "document_idle"
     }
@@ -24,7 +25,8 @@
     "128": "icons/icon128.png"
   },
   "browser_action": {
-    "default_icon": "icons/icon16.png"
+    "default_icon": "icons/icon16.png",
+    "default_popup": "popup/popup.html"
   },
   "manifest_version": 2
 }
