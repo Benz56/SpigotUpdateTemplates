@@ -40,7 +40,7 @@ const templateHTML =
             <table class="updateTemplateTable">
             <tr>
                 <th>
-                    <p>Save New</p>
+                    <p>Create New</p>
                 </th>
                 <th>
                     <p>Load/Edit</p>

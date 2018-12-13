@@ -5,6 +5,7 @@ const templateWidget = {
         saveInput: document.createElement("div"),
         redactorToolbar: document.querySelector(".redactor_toolbar"),
         redactorBoxParent: document.querySelector(".redactor_box").parentNode,
+        versionField: document.querySelector("#ctrl_version_string"),
         menuOpen: false
     },
 
@@ -14,9 +15,11 @@ const templateWidget = {
         this.variables.redactorToolbar.appendChild(this.variables.img_li);
         this.variables.img_li.appendChild(this.variables.img);
         this.variables.saveInput.innerHTML = templateHTML;
+        this.versionSuggestion();
         this.bindToggleMenuAction();
         templateStorage.pageOpenInit();
         chrome.storage.sync.get(["SUT_AutoOpen"], function (result) {
+            if (!result.SUT_AutoOpen) return;
             templateWidget.setMenu(result.SUT_AutoOpen);
         });
     },
@@ -25,6 +28,34 @@ const templateWidget = {
         this.variables.img_li.onclick = function () {
             templateWidget.setMenu(!templateWidget.variables.menuOpen);
         }
+    },
+
+    versionSuggestion: function () {
+        let version = this.variables.versionField.placeholder.replace("Currently version ", "");
+        if (/[^0-9.]+/.test(version)) return; // Incorrect version structure. Only numbers separated by dots.
+        this.variables.versionField.style.width = "70%";
+
+        let list = document.createElement("select");
+        list.style.width = "28%";
+        list.style.marginLeft = "2%";
+        list.style.height = "26px";
+        list.style.border = "1px solid #dddddd";
+        list.style.borderRadius = list.style.padding = "3px";
+        list.options.add(new Option("Select version", "", true, true));
+
+        let numbers = version.split(".").map(value => parseInt(value));
+        for (let i = numbers.length - 1; i >= 0; i--) {
+            let arr = numbers.slice(0); //Clone/Copy
+            arr[i]++;
+            for (let j = i + 1; j < numbers.length; j++) arr[j] = 0; // Replace prior with 0.
+            list.options.add(new Option(arr.join("."), arr.join(".")));
+        }
+
+        list.onchange = function () {
+            templateWidget.variables.versionField.value = this.value;
+        };
+
+        this.variables.versionField.parentNode.insertBefore(list, this.variables.versionField.nextSibling);
     },
 
     setMenu(bool = true) {
