@@ -10,6 +10,8 @@ const templateStorage = {
         nameInput: null,
         saveButton: null,
         loadButton: null,
+        appendButton: null,
+        prependButton: null,
         updateButton: null,
         deleteButton: null,
         selectButton: null
@@ -28,6 +30,8 @@ const templateStorage = {
         this.variables.responseBox = document.querySelector("#templateActionResponse");
         this.variables.saveButton = document.querySelector("#templateSaveButton");
         this.variables.loadButton = document.querySelector("#templateLoadButton");
+        this.variables.appendButton = document.querySelector("#templateAppendButton");
+        this.variables.prependButton = document.querySelector("#templatePrependButton");
         this.variables.updateButton = document.querySelector("#templateUpdateButton");
         this.variables.deleteButton = document.querySelector("#templateDeleteButton");
         this.variables.selectButton = document.querySelector("#templateSelectButton");
@@ -54,6 +58,18 @@ const templateStorage = {
             if (templateStorage.loadTemplate(localStorage.getItem(templateKeyPrefix + templateStorage.variables.editTemplatesList.value))) {
                 templateStorage.setResponse("Successfully loaded template!");
             } else templateStorage.setResponse("Unable to load template!", "red");
+        };
+
+        this.variables.appendButton.onclick = function () {
+            if (templateStorage.loadTemplate(localStorage.getItem(templateKeyPrefix + templateStorage.variables.editTemplatesList.value), "append")) {
+                templateStorage.setResponse("Successfully appended template!");
+            } else templateStorage.setResponse("Unable to append template!", "red");
+        };
+
+        this.variables.prependButton.onclick = function () {
+            if (templateStorage.loadTemplate(localStorage.getItem(templateKeyPrefix + templateStorage.variables.editTemplatesList.value), "prepend")) {
+                templateStorage.setResponse("Successfully prepended template!");
+            } else templateStorage.setResponse("Unable to prepend template!", "red");
         };
 
         this.variables.updateButton.onclick = function () {
@@ -118,8 +134,20 @@ const templateStorage = {
         document.querySelector("#templateNameInput").value = "";
     },
 
-    loadTemplate: function (template) {
-        if (template !== null) document.querySelector(".redactor_").contentDocument.body.innerHTML = template;
+    loadTemplate: function (template, placement = "overwrite") {
+        if (template !== null) {
+            switch (placement) {
+                case "overwrite":
+                    document.querySelector(".redactor_").contentDocument.body.innerHTML = template;
+                    break;
+                case "append":
+                    document.querySelector(".redactor_").contentDocument.body.innerHTML += template;
+                    break;
+                case "prepend":
+                    document.querySelector(".redactor_").contentDocument.body.innerHTML = template + document.querySelector(".redactor_").contentDocument.body.innerHTML;
+                    break;
+            }
+        }
         return template !== null;
     },
 

@@ -29,12 +29,21 @@ const templateHTML =
                     width: 100%;
                 }
                 
+                #templateSaveButton, #templateSelectButton {
+                    height: 38px;
+                }
+                
                 #templateNameInput {
                     width: 97%;
                 }
                 
                 #templateLoadButton, #templateUpdateButton, #templateDeleteButton {
                     width: 31%;
+                }
+                
+                #templateAppendButton, #templatePrependButton {
+                    margin-top: 3px;
+                    width: 47.5%;
                 }
             </style>
             <table class="updateTemplateTable">
@@ -64,9 +73,11 @@ const templateHTML =
                         <select id="editTemplatesList" name="Templates">
                         </select>
                         <br><br>
-                        <input id="templateLoadButton" type="button" value="Load" title="Load the selected template">
+                        <input id="templateLoadButton" type="button" value="Load" title="Set the content to the content stored in this template">
                         <input id="templateUpdateButton" type="button" value="Update" title="Update the selected template to the content below">
                         <input id="templateDeleteButton" type="button" value="Delete" title="Delete the template and all selection defaults of it">
+                        <input id="templateAppendButton" type="button" value="Append" title="Add the template at the end of the current content">
+                        <input id="templatePrependButton" type="button" value="Prepend" title="Add the template at the beginning of the current content">
                     </form>
                 </td>
                 <td>
