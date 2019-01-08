@@ -1,6 +1,6 @@
 {
   "name": "Spigot Update Templates",
-  "version": "1.3.0",
+  "version": "1.4.2",
   "description": "Save various templates to make updates look better and less tedious to setup!",
   "permissions": [
     "https://www.spigotmc.org/*",
