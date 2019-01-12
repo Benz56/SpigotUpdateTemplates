@@ -76,12 +76,15 @@ const templateWidget = {
 
         list.onchange = function () {
             templateWidget.variables.versionField.value = this.value;
+            let versionLength = list.options[1].text.length;
             let title = templateWidget.variables.updateTitle.value;
-            if (title === "") {
+            if (title === "" && this.value !== "") {
                 templateWidget.variables.updateTitle.value = "[" + this.value + "] ";
-            } else if (title.startsWith("[") && title.charAt(1 + this.value.length) === "]") {
-                templateWidget.variables.updateTitle.value = "[" + this.value + "]" + title.substring(2 + this.value.length);
-            }
+            } else if (title.startsWith("[") && title.charAt(1 + versionLength) === "]") {
+                if (this.value !== "") {
+                    templateWidget.variables.updateTitle.value = "[" + this.value + "]" + title.substring(2 + versionLength);
+                } else templateWidget.variables.updateTitle.value = title.substring((title.length > versionLength + 2 && title.charAt(versionLength + 2) === ' ' ? 3 : 2) + versionLength);
+            } else if (!title.startsWith("[") && this.value !== "") templateWidget.variables.updateTitle.value = "[" + this.value + "] " + title;
         };
 
         this.variables.versionField.parentNode.insertBefore(list, this.variables.versionField.nextSibling);
