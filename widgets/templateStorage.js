@@ -23,7 +23,13 @@ const templateStorage = {
         };
         let templateName = localStorage.getItem(selectedTemplateKeyPrefix + this.variables.resourceId);
         if (templateName === null) return;
-        this.loadTemplate(localStorage.getItem(templateKeyPrefix + templateName));
+        if (document.querySelector(".redactor_").contentDocument.body.innerHTML !== "<p><br></p>") {
+            chrome.storage.sync.get(["SUT_Overwrite"], function (result) {
+                if (result.SUT_Overwrite) {
+                    templateStorage.loadTemplate(localStorage.getItem(templateKeyPrefix + templateName));
+                }
+            });
+        } else this.loadTemplate(localStorage.getItem(templateKeyPrefix + templateName));
     },
 
     templateMenuInit: function () {

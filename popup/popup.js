@@ -1,9 +1,20 @@
-const checkBox = document.querySelector("#autoOpenCB");
+const autoOpenCB = document.querySelector("#autoOpenCB");
+const overwriteCB = document.querySelector("#overwriteDraft");
 
+//Auto Open
 chrome.storage.sync.get(["SUT_AutoOpen"], function (result) {
-    checkBox.checked = result.SUT_AutoOpen;
+    autoOpenCB.checked = result.SUT_AutoOpen;
 });
 
-checkBox.onclick = function () {
-    chrome.storage.sync.set({"SUT_AutoOpen": checkBox.checked});
+autoOpenCB.onclick = function () {
+    chrome.storage.sync.set({"SUT_AutoOpen": autoOpenCB.checked});
+};
+
+//Overwrite
+chrome.storage.sync.get(["SUT_Overwrite"], function (result) {
+    overwriteCB.checked = result.SUT_Overwrite;
+});
+
+overwriteCB.onclick = function () {
+    chrome.storage.sync.set({"SUT_Overwrite": overwriteCB.checked});
 };

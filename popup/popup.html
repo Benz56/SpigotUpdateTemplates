@@ -10,16 +10,23 @@
     .titleImage {
         text-align: center;
     }
+
+    #autoOpenCB, #overwriteDraft {
+        margin-left: 15px;
+    }
 </style>
 <div class="sutPopup">
     <div class="titleImage">
         <img src="https://imgur.com/lwyj8yR.png" alt="Update Template Image">
     </div>
     <hr>
-    &nbsp;&nbsp;
     <input id="autoOpenCB" type="checkbox"
-           title="If checked the template menu is automatically opened when the page is loaded">
+           title="If checked, the template menu is automatically opened when the page is loaded">
     <label for="autoOpenCB">Auto-Open Template Menu</label>
+    <br>
+    <input id="overwriteDraft" type="checkbox"
+           title="If checked, any saved drafts are ignored and the default template is loaded regardless">
+    <label for="overwriteDraft">Overwrite Drafts</label>
     <hr>
 </div>
 
