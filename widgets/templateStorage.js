@@ -4,6 +4,7 @@ const templateStorage = {
         resourceId: window.location.href.substring(window.location.href.lastIndexOf(".")).replace(".", "").split("/")[0],
         templateContent: document.querySelector(".redactor_").contentDocument,
         bbCodeEditorButton: document.querySelector(".redactor_btn_group.redactor_btn_right"),
+        isAddVersion: false,
         responseBox: null,
         editTemplatesList: null,
         resourceTemplatesList: null,
@@ -21,6 +22,8 @@ const templateStorage = {
         this.variables.bbCodeEditorButton.onclick = function () {
             templateWidget.setMenu(false);
         };
+        this.variables.isAddVersion = window.location.href.substring(window.location.href.lastIndexOf("/")) === "/add-version";
+        if (!this.variables.isAddVersion) return;
         let templateName = localStorage.getItem(selectedTemplateKeyPrefix + this.variables.resourceId);
         if (templateName === null) return;
         if (document.querySelector(".redactor_").contentDocument.body.innerHTML !== "<p><br></p>") {
@@ -43,11 +46,15 @@ const templateStorage = {
         this.variables.selectButton = document.querySelector("#templateSelectButton");
         this.variables.editTemplatesList = document.querySelector("#editTemplatesList");
         this.variables.resourceTemplatesList = document.querySelector("#resourceTemplatesList");
+        if (!templateStorage.variables.isAddVersion) {
+            this.variables.selectButton.disabled = true;
+            this.variables.resourceTemplatesList.disabled = true;
+        }
         this.bindUIButtons();
         this.updateSelectableTemplates();
         let selected = localStorage.getItem(selectedTemplateKeyPrefix + templateStorage.variables.resourceId);
         this.setResponse("This resource does not have a default template. Select one in the right most dropdown!");
-        if (selected === null) return;
+        if (!this.variables.isAddVersion || selected === null) return;
         this.setResponse("Successfully loaded the default template for this resource!");
         this.variables.editTemplatesList.value = selected;
         this.variables.resourceTemplatesList.value = selected;
@@ -126,7 +133,7 @@ const templateStorage = {
             templateStorage.variables.editTemplatesList.appendChild(option.cloneNode(true));
         });
         let selected = localStorage.getItem(selectedTemplateKeyPrefix + templateStorage.variables.resourceId);
-        if (selected === null) return;
+        if (!this.variables.isAddVersion || selected === null) return;
         this.variables.resourceTemplatesList.value = selected;
     },
 
