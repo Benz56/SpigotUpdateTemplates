@@ -163,15 +163,6 @@ const templateStorage = {
         return template !== null;
     },
 
-    updateTemplate: function (oldVersion, newVersion) {
-        let current = document.querySelector(".redactor_").contentDocument.body.innerHTML;
-        if (newVersion !== "") {
-            current = current.replace(/%version%/g, newVersion);
-            if (oldVersion !== "") current = current.replace(new RegExp(oldVersion, "g"), newVersion);
-        } else if (oldVersion !== "") current = current.replace(new RegExp(oldVersion, "g"), "%version%");
-        document.querySelector(".redactor_").contentDocument.body.innerHTML = current;
-    },
-
     setResponse(message = "", color = "green") {
         this.variables.responseBox.innerHTML = message;
         this.variables.responseBox.style.color = color;

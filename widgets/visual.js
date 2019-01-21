@@ -75,7 +75,7 @@ const templateWidget = {
         }
 
         list.onchange = function () {
-            templateStorage.updateTemplate(templateWidget.variables.versionField.value, this.value);
+            templateWidget.updateTemplate(templateWidget.variables.versionField.value, this.value);
             templateWidget.variables.versionField.value = this.value;
             let versionLength = list.options[1].text.length;
             let title = templateWidget.variables.updateTitle.value;
@@ -89,6 +89,15 @@ const templateWidget = {
         };
 
         this.variables.versionField.parentNode.insertBefore(list, this.variables.versionField.nextSibling);
+    },
+
+    updateTemplate: function (oldVersion, newVersion) {
+        let current = document.querySelector(".redactor_").contentDocument.body.innerHTML;
+        if (newVersion !== "") {
+            current = current.replace(/%version%/g, newVersion);
+            if (oldVersion !== "") current = current.replace(new RegExp(oldVersion, "g"), newVersion);
+        } else if (oldVersion !== "") current = current.replace(new RegExp(oldVersion, "g"), "%version%");
+        document.querySelector(".redactor_").contentDocument.body.innerHTML = current;
     },
 
     setMenu(bool = true) {
