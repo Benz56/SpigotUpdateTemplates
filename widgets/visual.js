@@ -75,6 +75,7 @@ const templateWidget = {
         }
 
         list.onchange = function () {
+            templateStorage.updateTemplate(templateWidget.variables.versionField.value, this.value);
             templateWidget.variables.versionField.value = this.value;
             let versionLength = list.options[1].text.length;
             let title = templateWidget.variables.updateTitle.value;

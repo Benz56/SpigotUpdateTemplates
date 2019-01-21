@@ -46,10 +46,8 @@ const templateStorage = {
         this.variables.selectButton = document.querySelector("#templateSelectButton");
         this.variables.editTemplatesList = document.querySelector("#editTemplatesList");
         this.variables.resourceTemplatesList = document.querySelector("#resourceTemplatesList");
-        if (!templateStorage.variables.isAddVersion) {
-            this.variables.selectButton.disabled = true;
-            this.variables.resourceTemplatesList.disabled = true;
-        }
+        this.variables.selectButton.disabled = !templateStorage.variables.isAddVersion;
+        this.variables.resourceTemplatesList.disabled = !templateStorage.variables.isAddVersion;
         this.bindUIButtons();
         this.updateSelectableTemplates();
         let selected = localStorage.getItem(selectedTemplateKeyPrefix + templateStorage.variables.resourceId);
@@ -149,6 +147,8 @@ const templateStorage = {
 
     loadTemplate: function (template, placement = "overwrite") {
         if (template !== null) {
+            if (templateWidget.variables.versionField.value !== "") template = template.replace(/%version%/g, templateWidget.variables.versionField.value);
+
             switch (placement) {
                 case "overwrite":
                     document.querySelector(".redactor_").contentDocument.body.innerHTML = template;
@@ -158,10 +158,18 @@ const templateStorage = {
                     break;
                 case "prepend":
                     document.querySelector(".redactor_").contentDocument.body.innerHTML = template + document.querySelector(".redactor_").contentDocument.body.innerHTML;
-                    break;
             }
         }
         return template !== null;
+    },
+
+    updateTemplate: function (oldVersion, newVersion) {
+        let current = document.querySelector(".redactor_").contentDocument.body.innerHTML;
+        if (newVersion !== "") {
+            current = current.replace(/%version%/g, newVersion);
+            if (oldVersion !== "") current = current.replace(new RegExp(oldVersion, "g"), newVersion);
+        } else if (oldVersion !== "") current = current.replace(new RegExp(oldVersion, "g"), "%version%");
+        document.querySelector(".redactor_").contentDocument.body.innerHTML = current;
     },
 
     setResponse(message = "", color = "green") {
