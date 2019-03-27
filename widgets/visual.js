@@ -1,9 +1,9 @@
 const templateWidget = {
     variables: {
-        btn_img: document.createElement("img"),
-        btn_img_hover: document.createElement("img"),
-        btn_img_click: document.createElement("img"),
-        btn_img_li: document.createElement("li"),
+        btnImg: document.createElement("img"),
+        btnImgHover: document.createElement("img"),
+        btnImgClick: document.createElement("img"),
+        btnImgLi: document.createElement("li"),
         saveInput: document.createElement("div"),
         redactorToolbar: document.querySelector(".redactor_toolbar"),
         redactorBoxParent: document.querySelector(".redactor_box").parentNode,
@@ -13,12 +13,12 @@ const templateWidget = {
     },
 
     init: function () {
-        this.variables.btn_img.src = "data:img;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTnU1rJkAAAAtElEQVRIS+2X4QqDIBSF7zP3Aj1tv3Ng+yHInWfkuGxl16FJmx8cjDC/TiAkOefYWsvG3HieTdXAARechItlubP3nmsDB1xwEt7iDGkELjgJn+Bs4OziD4hIHS1qsYYceQ3xoJmfJQ7juC7+njHOk0lRtLGkqDiMe41lXu1T9MabHC2yxW+Iw4g9Oh1kkM/scZnGfTvFPFtKcD/FNRrnUEz8TVKoxDX4U3GzH/pmR5g2hzbHD1U/iKWuJ/q4AAAAAElFTkSuQmCC";
-        this.variables.btn_img_hover.src = "data:img;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTnU1rJkAAAA30lEQVRIS+2X/QqDIBRH7zP3Aj3t/q5BCQnhPFHjztEn17WgAz+0MI9XEEy896FpmlDXz1BVddbgwIVT6LStC33fh9zgwIVTWMUvpBO4cApboGEbnHOmYU4Nzg8xA7quG5/sYE4t/xKzulzouTeJRWRzljgk3sKaPLe4mBt/WBzbcpw8TTmN00nJVrHGVBzbuYp13tWn3BX/f8V7MBXHljP6WEmhv9FcsuL7OE0ZqtTwPuV6Fe/BTHwkKbvFViyKT7vsAQNYnWW0FAbxaRf6035h2AY6rIItyBkcuLz34QUpiH91UFRu+QAAAABJRU5ErkJggg==";
-        this.variables.btn_img_click.src = "data:img;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAIAAAC0Ujn1AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTnU1rJkAAAA5ElEQVRIS+2W0QmDMBBAs1RX7ShdouAKQTqAFrQfAUmfJp5atbYxAT98HHgkuZcLIkYZY6qqKstnUZRRAhVCtIpHXb+aprGRQIUQrWKTiF4HQrSKI/gBa/M8z7LsHgSFlHuRtWgHNRNaa5eHQbnYJ2q2dckeRDJRcyiXOB63y/fw66aIZEPtsyXW7HHUVl/na/5Rd/XjYMTNDiMjInQt7FDPupaQ9ttlPWfXx1Sfr7Hno2aNHeqVD11oR0YcpOstAtU/hi/oWFYn/IEl/O0CE2zLoQKgULzQqhNecRJezFJdJ415A7xetj9XiZaSAAAAAElFTkSuQmCC";
-        this.variables.btn_img_li.title = "Toggle templates menu";
-        this.variables.redactorToolbar.appendChild(this.variables.btn_img_li);
-        this.variables.btn_img_li.appendChild(this.variables.btn_img);
+        this.variables.btnImg.src = "data:img;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTnU1rJkAAAAtElEQVRIS+2X4QqDIBSF7zP3Aj1tv3Ng+yHInWfkuGxl16FJmx8cjDC/TiAkOefYWsvG3HieTdXAARechItlubP3nmsDB1xwEt7iDGkELjgJn+Bs4OziD4hIHS1qsYYceQ3xoJmfJQ7juC7+njHOk0lRtLGkqDiMe41lXu1T9MabHC2yxW+Iw4g9Oh1kkM/scZnGfTvFPFtKcD/FNRrnUEz8TVKoxDX4U3GzH/pmR5g2hzbHD1U/iKWuJ/q4AAAAAElFTkSuQmCC";
+        this.variables.btnImgHover.src = "data:img;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTnU1rJkAAAA30lEQVRIS+2X/QqDIBRH7zP3Aj3t/q5BCQnhPFHjztEn17WgAz+0MI9XEEy896FpmlDXz1BVddbgwIVT6LStC33fh9zgwIVTWMUvpBO4cApboGEbnHOmYU4Nzg8xA7quG5/sYE4t/xKzulzouTeJRWRzljgk3sKaPLe4mBt/WBzbcpw8TTmN00nJVrHGVBzbuYp13tWn3BX/f8V7MBXHljP6WEmhv9FcsuL7OE0ZqtTwPuV6Fe/BTHwkKbvFViyKT7vsAQNYnWW0FAbxaRf6035h2AY6rIItyBkcuLz34QUpiH91UFRu+QAAAABJRU5ErkJggg==";
+        this.variables.btnImgClick.src = "data:img;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAIAAAC0Ujn1AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTnU1rJkAAAA5ElEQVRIS+2W0QmDMBBAs1RX7ShdouAKQTqAFrQfAUmfJp5atbYxAT98HHgkuZcLIkYZY6qqKstnUZRRAhVCtIpHXb+aprGRQIUQrWKTiF4HQrSKI/gBa/M8z7LsHgSFlHuRtWgHNRNaa5eHQbnYJ2q2dckeRDJRcyiXOB63y/fw66aIZEPtsyXW7HHUVl/na/5Rd/XjYMTNDiMjInQt7FDPupaQ9ttlPWfXx1Sfr7Hno2aNHeqVD11oR0YcpOstAtU/hi/oWFYn/IEl/O0CE2zLoQKgULzQqhNecRJezFJdJ415A7xetj9XiZaSAAAAAElFTkSuQmCC";
+        this.variables.btnImgLi.title = "Toggle templates menu";
+        this.variables.redactorToolbar.appendChild(this.variables.btnImgLi);
+        this.variables.btnImgLi.appendChild(this.variables.btnImg);
         this.variables.saveInput.innerHTML = templateHTML;
         this.versionSuggestion();
         this.bindToggleMenuActions();
@@ -30,24 +30,24 @@ const templateWidget = {
     },
 
     bindToggleMenuActions: function () {
-        this.variables.btn_img_li.onmouseover = function () {
-            if (templateWidget.variables.btn_img_li.contains(templateWidget.variables.btn_img_click)) return;
-            templateWidget.variables.btn_img_li.firstChild.replaceWith(templateWidget.variables.btn_img_hover);
+        this.variables.btnImgLi.onmouseover = function () {
+            if (templateWidget.variables.btnImgLi.contains(templateWidget.variables.btnImgClick)) return;
+            templateWidget.variables.btnImgLi.firstChild.replaceWith(templateWidget.variables.btnImgHover);
         };
-        this.variables.btn_img_li.onmouseleave = function () {
-            templateWidget.variables.btn_img_li.firstChild.replaceWith(templateWidget.variables.btn_img);
+        this.variables.btnImgLi.onmouseleave = function () {
+            templateWidget.variables.btnImgLi.firstChild.replaceWith(templateWidget.variables.btnImg);
         };
-        this.variables.btn_img_li.onmousedown = function () {
-            templateWidget.variables.btn_img_li.firstChild.replaceWith(templateWidget.variables.btn_img_click);
+        this.variables.btnImgLi.onmousedown = function () {
+            templateWidget.variables.btnImgLi.firstChild.replaceWith(templateWidget.variables.btnImgClick);
         };
-        this.variables.btn_img_li.onmouseup = function () {
-            templateWidget.variables.btn_img_li.firstChild.replaceWith(templateWidget.variables.btn_img);
+        this.variables.btnImgLi.onmouseup = function () {
+            templateWidget.variables.btnImgLi.firstChild.replaceWith(templateWidget.variables.btnImg);
             templateWidget.setMenu(!templateWidget.variables.menuOpen);
         };
-        this.variables.btn_img_click.ondragstart = function () {
+        this.variables.btnImgClick.ondragstart = function () {
             return false;
         };
-        this.variables.btn_img_li.ondragstart = function () {
+        this.variables.btnImgLi.ondragstart = function () {
             return false;
         }
     },
@@ -64,6 +64,7 @@ const templateWidget = {
         list.style.border = "1px solid #dddddd";
         list.style.borderRadius = list.style.padding = "3px";
         list.style.fontWeight = "bold";
+        list.style.outline = "none";
         list.options.add(new Option("Select version", "", true, true));
 
         let numbers = version.split(".").map(value => parseInt(value));
@@ -75,29 +76,29 @@ const templateWidget = {
         }
 
         list.onchange = function () {
-            templateWidget.updateTemplate(templateWidget.variables.versionField.value, this.value);
+            templateWidget.replacePlaceholders(templateWidget.variables.versionField.value, this.value);
             templateWidget.variables.versionField.value = this.value;
-            let versionLength = list.options[1].text.length;
-            let title = templateWidget.variables.updateTitle.value;
-            if (title === "" && this.value !== "") {
-                templateWidget.variables.updateTitle.value = "[" + this.value + "] ";
-            } else if (title.startsWith("[") && title.charAt(1 + versionLength) === "]") {
-                if (this.value !== "") {
-                    templateWidget.variables.updateTitle.value = "[" + this.value + "]" + title.substring(2 + versionLength);
-                } else templateWidget.variables.updateTitle.value = title.substring((title.length > versionLength + 2 && title.charAt(versionLength + 2) === ' ' ? 3 : 2) + versionLength);
-            } else if (!title.startsWith("[") && this.value !== "") templateWidget.variables.updateTitle.value = "[" + this.value + "] " + title;
         };
 
         this.variables.versionField.parentNode.insertBefore(list, this.variables.versionField.nextSibling);
     },
 
-    updateTemplate: function (oldVersion, newVersion) {
-        let current = document.querySelector(".redactor_").contentDocument.body.innerHTML;
+    replacePlaceholders: function (oldVersion, newVersion) {
+        let currentText = document.querySelector(".redactor_").contentDocument.body.innerHTML;
+        let currentTitle = templateWidget.variables.updateTitle.value;
         if (newVersion !== "") {
-            current = current.replace(/%version%/g, newVersion);
-            if (oldVersion !== "") current = current.replace(new RegExp(oldVersion, "g"), newVersion);
-        } else if (oldVersion !== "") current = current.replace(new RegExp(oldVersion, "g"), "%version%");
-        document.querySelector(".redactor_").contentDocument.body.innerHTML = current;
+            currentText = currentText.replace(/%version%/g, newVersion);
+            currentTitle = currentTitle.replace(/%version%/g, newVersion);
+            if (oldVersion !== "") {
+                currentText = currentText.replace(new RegExp(oldVersion, "g"), newVersion);
+                currentTitle = currentTitle.replace(new RegExp(oldVersion, "g"), newVersion);
+            }
+        } else if (oldVersion !== "") {
+            currentText = currentText.replace(new RegExp(oldVersion, "g"), "%version%");
+            currentTitle = currentTitle.replace(new RegExp(oldVersion, "g"), "%version%");
+        }
+        templateWidget.variables.updateTitle.value = currentTitle;
+        document.querySelector(".redactor_").contentDocument.body.innerHTML = currentText;
     },
 
     setMenu(bool = true) {

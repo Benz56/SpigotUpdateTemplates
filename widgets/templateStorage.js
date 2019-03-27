@@ -1,4 +1,5 @@
-const templateKeyPrefix = "|S/\\U/\\T|-T-", selectedTemplateKeyPrefix = "|S/\\U/\\T|-ST-";
+const templateKeyPrefix = "|S/\\U/\\T|-T-", selectedTemplateKeyPrefix = "|S/\\U/\\T|-ST-",
+    titleKeyPrefix = "|S/\\U/\\T|-UT-";
 const templateStorage = {
     variables: {
         resourceId: window.location.href.substring(window.location.href.lastIndexOf(".")).replace(".", "").split("/")[0],
@@ -24,6 +25,7 @@ const templateStorage = {
         };
         this.variables.isAddVersion = window.location.href.substring(window.location.href.lastIndexOf("/")) === "/add-version";
         if (!this.variables.isAddVersion) return;
+        this.initTitleElements();
         let templateName = localStorage.getItem(selectedTemplateKeyPrefix + this.variables.resourceId);
         if (templateName === null) return;
         if (document.querySelector(".redactor_").contentDocument.body.innerHTML !== "<p><br></p>") {
@@ -56,6 +58,56 @@ const templateStorage = {
         this.setResponse("Successfully loaded the default template for this resource!");
         this.variables.editTemplatesList.value = selected;
         this.variables.resourceTemplatesList.value = selected;
+    },
+
+    initTitleElements: function () {
+        let version = templateWidget.variables.versionField.placeholder.replace("Currently version ", "");
+        if (/[^0-9.]+/.test(version)) return; // Incorrect version structure. Only numbers separated by dots.
+
+        templateWidget.variables.updateTitle.style.width = "70%";
+        let defaultTitle = localStorage.getItem(titleKeyPrefix + "title");
+        templateWidget.variables.updateTitle.value = defaultTitle === null ? "[%version%] " : defaultTitle;
+
+        let titleBtn = document.createElement("button");
+        titleBtn.type = "button";
+        titleBtn.style.width = "28%";
+        titleBtn.style.marginLeft = "2%";
+        titleBtn.style.height = "26px";
+        titleBtn.style.border = "1px solid #dddddd";
+        titleBtn.style.background = "#d9d9d9";
+        titleBtn.style.color = "#535353";
+        titleBtn.style.outline = "none";
+        titleBtn.style.borderRadius = titleBtn.style.padding = "3px";
+        titleBtn.style.fontWeight = "bold";
+        titleBtn.style.boxShadow = "inset 0 -2px 0 rgba(0,0,0,.1)";
+        titleBtn.textContent = "Save as Default";
+        titleBtn.title = "Save the current title as the default title for all updates";
+        templateWidget.variables.updateTitle.parentNode.insertBefore(titleBtn, templateWidget.variables.updateTitle.nextSibling);
+
+        let canClick = true;
+        titleBtn.onclick = function () {
+            if (canClick === false) return;
+            canClick = false;
+            titleBtn.textContent = "Saved";
+            localStorage.setItem(titleKeyPrefix + "title", templateWidget.variables.updateTitle.value);
+        };
+
+        titleBtn.onmouseleave = function () {
+            canClick = true;
+            titleBtn.style.background = "#d9d9d9";
+            titleBtn.style.color = "#535353";
+            titleBtn.textContent = "Save as Default";
+        };
+
+        titleBtn.onmousedown = function () {
+            titleBtn.style.background = "#252525";
+            titleBtn.style.color = "#ffffff";
+        };
+
+        titleBtn.onmouseup = titleBtn.onmouseenter = function () {
+            titleBtn.style.background = "#ed8106";
+            titleBtn.style.color = "#ffffff";
+        };
     },
 
     bindUIButtons: function () {
