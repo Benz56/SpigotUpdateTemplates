@@ -9,6 +9,7 @@ const templateWidget = {
         redactorBoxParent: document.querySelector(".redactor_box").parentNode,
         versionField: document.querySelector("#ctrl_version_string"),
         updateTitle: document.querySelector("#ctrl_title"),
+        cursor: document.createElement("cursor").style.cursor,
         menuOpen: false
     },
 
@@ -20,6 +21,7 @@ const templateWidget = {
         this.variables.redactorToolbar.appendChild(this.variables.btnImgLi);
         this.variables.btnImgLi.appendChild(this.variables.btnImg);
         this.variables.saveInput.innerHTML = templateHTML;
+        this.variables.cursor = "pointer";
         this.versionSuggestion();
         this.bindToggleMenuActions();
         templateStorage.pageOpenInit();
